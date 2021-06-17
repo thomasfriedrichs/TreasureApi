@@ -7,10 +7,10 @@ class ItemDataService {
     return http.get(`/Items/${id}`);
   }
   create(data) {
-    return http.post("/Items/create", data);
+    return http.post("/Items", data);
   }
   update(id, data) {
-    return http.put(`/Items/edit/${id}`, data);
+    return http.put(`/Items/${id}`, data);
   }
   delete(id) {
     return http.delete(`/Items/${id}`);
