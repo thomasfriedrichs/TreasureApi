@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import ItemDataService from "../services/Item.Service";
 import { Link } from "react-router-dom";
 
-
 export default class AddItem extends Component {
   constructor(props) {
     super(props);
+    this.onChangeItemId = this.onChangeItemId.bind(this);
     this.onChangeTitle = this.onChangeTitle.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
     this.onChangeAddress = this.onChangeAddress.bind(this);
@@ -30,6 +30,12 @@ export default class AddItem extends Component {
 
       submitted: false,
     };
+  }
+
+  onChangeItemId(e) {
+    this.setState({
+      itemId: e.target.value,
+    });
   }
 
   onChangeTitle(e) {
@@ -82,7 +88,6 @@ export default class AddItem extends Component {
 
   saveItem() {
     var data = {
-      
       title: this.state.title,
       description: this.state.description,
       address: this.state.address,
@@ -92,7 +97,7 @@ export default class AddItem extends Component {
       weight: this.state.weight,
       images: this.state.images, //IMAGES
     };
-    
+
     ItemDataService.create(data)
       .then((response) => {
         this.setState({
@@ -132,114 +137,112 @@ export default class AddItem extends Component {
   render() {
     return (
       <div className="submit-form">
-      {this.state.submitted ? (
-        <div>
-        <h4>You've added successfully!</h4>
-        <Link to={"/items/"}>
-          <button className="edit btn btn-outline-primary">
-            Home
-          </button>
-        </Link>
-        <Link to={"/AddImages/"}>
-          <button className="edit btn btn-outline-primary">
-            Add Images
-          </button>
-        </Link>
-        </div>
-      ) : (
-        <div>
-        <div className="form-group">
-          <label htmlFor="title">Title</label>
-          <input
-          type="text"
-          className="form-control"
-          id="title"
-          required
-          value={this.state.title}
-          onChange={this.onChangeTitle}
-          name="title"
-          />
-        </div>
-  
-        <div className="form-group">
-          <label htmlFor="description">Description</label>
-          <input
-          type="text"
-          className="form-control"
-          id="description"
-          required
-          value={this.state.description}
-          onChange={this.onChangeDescription}
-          name="description"
-          />
-        </div>
+        {this.state.submitted ? (
+          <div>
+            <h4>You've added successfully!</h4>
+            <Link to={"/items/"}>
+              <button className="edit btn btn-outline-primary">Home</button>
+            </Link>
+            <Link to={`/AddImages/${this.state.itemId}`}>
+              <button className="edit btn btn-outline-primary">
+                Add Images
+              </button>
+            </Link>
+          </div>
+        ) : (
+          <div>
+            <div className="form-group">
+              <label htmlFor="title">Title</label>
+              <input
+                type="text"
+                className="form-control"
+                id="title"
+                required
+                value={this.state.title}
+                onChange={this.onChangeTitle}
+                name="title"
+              />
+            </div>
 
-        <div className="form-group">
-          <label htmlFor="address">Address</label>
-          <input
-          type="text"
-          className="form-control"
-          id="adress"
-          required
-          value={this.state.address}
-          onChange={this.onChangeAddress}
-          name="adress"
-          />
-        </div>
+            <div className="form-group">
+              <label htmlFor="description">Description</label>
+              <input
+                type="text"
+                className="form-control"
+                id="description"
+                required
+                value={this.state.description}
+                onChange={this.onChangeDescription}
+                name="description"
+              />
+            </div>
 
-        <div className="form-group">
-          <label htmlFor="condition">Condition</label>
-          <input
-          type="text"
-          className="form-control"
-          id="condition"
-          required
-          value={this.state.condition}
-          onChange={this.onChangeCondition}
-          name="condition"
-          />
-        </div>
+            <div className="form-group">
+              <label htmlFor="address">Address</label>
+              <input
+                type="text"
+                className="form-control"
+                id="adress"
+                required
+                value={this.state.address}
+                onChange={this.onChangeAddress}
+                name="adress"
+              />
+            </div>
 
-        <div className="form-group">
-          <label htmlFor="url">Url</label>
-          <input
-          type="text"
-          className="form-control"
-          id="url"
-          required
-          value={this.state.url}
-          onChange={this.onChangeUrl}
-          name="url"
-          />
-        </div>
+            <div className="form-group">
+              <label htmlFor="condition">Condition</label>
+              <input
+                type="text"
+                className="form-control"
+                id="condition"
+                required
+                value={this.state.condition}
+                onChange={this.onChangeCondition}
+                name="condition"
+              />
+            </div>
 
-        <div className="form-group">
-          <label htmlFor="dimensions">Dimensions</label>
-          <input
-          type="text"
-          className="form-control"
-          id="dimensions"
-          required
-          value={this.state.dimensions}
-          onChange={this.onChangeDimensions}
-          name="dimensions"
-          />
-        </div>
+            <div className="form-group">
+              <label htmlFor="url">Url</label>
+              <input
+                type="text"
+                className="form-control"
+                id="url"
+                required
+                value={this.state.url}
+                onChange={this.onChangeUrl}
+                name="url"
+              />
+            </div>
 
-        <div className="form-group">
-          <label htmlFor="weight">Weight</label>
-          <input
-          type="text"
-          className="form-control"
-          id="weight"
-          required
-          value={this.state.weight}
-          onChange={this.onChangeWeight}
-          name="weight"
-          />
-        </div>
+            <div className="form-group">
+              <label htmlFor="dimensions">Dimensions</label>
+              <input
+                type="text"
+                className="form-control"
+                id="dimensions"
+                required
+                value={this.state.dimensions}
+                onChange={this.onChangeDimensions}
+                name="dimensions"
+              />
+            </div>
 
-          {/* <div className="form-group">
+            <div className="form-group">
+              <label htmlFor="weight">Weight</label>
+              <input
+                type="text"
+                className="form-control"
+                id="weight"
+                required
+                value={this.state.weight}
+                onChange={this.onChangeWeight}
+                name="weight"
+              />
+            </div>
+
+            {/* <div className="form-group">
           <label htmlFor="images">Images</label>     
           <input
           type="file"
@@ -251,13 +254,14 @@ export default class AddItem extends Component {
           name="images"
           />
         </div> */}
-        <button onClick={this.saveItem} className="btn btn-success">
-          Submit
-        </button>
-        </div>
-      )}
+            <button onClick={this.saveItem} className="btn btn-success">
+              Submit
+            </button>
+          </div>
+        )}
       </div>
-    );  }
+    );
+  }
 }
 
 //{this.state.submitted ? (

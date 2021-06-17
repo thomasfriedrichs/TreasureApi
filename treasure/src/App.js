@@ -5,6 +5,7 @@ import "./App.css";
 import AddItem from "./components/AddItem.Component";
 import Item from "./components/Item.Component";
 import ItemsList from "./components/ItemsList.Component";
+import AddImages from "./components/AddImages.Component";
 
 class App extends Component {
   render() {
@@ -34,6 +35,7 @@ class App extends Component {
               <Route exact path={["/", "/Items"]} component={ItemsList} />
               <Route exact path="/add" component={AddItem} />
               <Route path="/Items/:id" component={Item} />
+              <Route path="/AddImages/:id" component={AddImages} />
             </Switch>
           </div>
         </div>
